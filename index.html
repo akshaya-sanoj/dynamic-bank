@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VAULTLINE</title>
+    <script src="./script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <!-- trailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- flowbite -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    <!-- fontawesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
+      integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bokor&family=Cinzel:wght@400..900&family=Cookie&family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Eagle+Lake&family=Felipa&family=Kavoon&family=Libertinus+Math&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Meddon&family=Montserrat:ital,wght@0,100..900;1,100..900&family=New+Rocker&family=Rouge+Script&family=Sekuya&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+<body class="bg-stone-50 text-neutral-900 transition-colors duration-300
+             dark:bg-emerald-950 dark:text-white">
+                 <nav
+      class="w-full px-6 py-4 rounded-3xl sticky top-0  z-50 border border-white/10 bg-emerald-950/100"
+    >
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img
+            src="./watermarked_img_10565261629110271654-removebg-preview.png"
+            style="width: 70px; height: 60px"
+            class="object-contain"
+          />
+          <h1
+            class="text-xl font-semibold py-3"
+            style="
+              font-family:
+                Libre Baskerville,
+                serif;
+            "
+          >
+            VAULTLINE
+          </h1>
+        </div>
+        <div class="flex justify-evenly gap-5">
+          <div>
+            <button
+              id="theme-toggle"
+              class="border p-3 w-20 rounded-full transition-all duration-300 hover:scale-110 btn-grad"
+            >
+              <i
+                id="theme-icon"
+                class="fa-solid fa-moon transition-transform duration-500"
+              >
+              </i>
+            </button>
+          </div>
+          <div class="c">
+            <a href="./register.html"
+              ><button
+                class="border rounded-full p-3 rounded-full font-semibold transition-all duration-300 hover:scale-110 btn-grad"
+                style="
+                  font-family:
+                    Libertinus Math,
+                    system-ui;
+                "
+              >
+                CREATE ACCOUNT
+              </button></a
+            >
+          </div>
+          <div class="c">
+            <a href="./login.html"
+              ><button
+                class="border rounded-full p-3 w-30 rounded-full font-semibold transition-all duration-300 hover:scale-110 btn-grad"
+                style="
+                  font-family:
+                    Libertinus Math,
+                    system-ui;
+                "
+              >
+                LOGIN
+              </button></a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="my-10 px-4 sm:px-6 lg:px-10">
+      <div
+        class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16"
+      >
+        <!-- Left Content -->
+        <div class="w-full lg:w-1/2 py-6 sm:py-10 text-center lg:text-left">
+          <h1
+            class="text-4xl sm:text-5xl lg:text-6xl capitalize cinzel leading-tight"
+          >
+            banking that feels <br />
+            <span class="italic g font-bold"> effortless </span>
+          </h1>
+          <p
+            class="text-md sm:text-xl lg:text-xl my-6 dm leading-relaxed max-w-xl mx-auto lg:mx-0 text-[#d4d4d8]"
+          >
+            Vaultline is a private, lightweight bank built right in your
+            browser. Open an account in seconds with just an email and a 4-digit
+            PIN — no paperwork, no waiting, no fees.
+          </p>
+          <!-- Buttons -->
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
+          >
+            <!-- Create Account -->
+            <a href="./register.html" class="w-full sm:w-auto">
+              <button
+                class="border rounded-full px-6 py-3 w-full sm:w-auto font-semibold transition-all duration-300 hover:scale-110 btn-grad"
+                style="
+                  font-family:
+                    Libertinus Math,
+                    system-ui;
+                "
+              >
+                CREATE ACCOUNT
+              </button>
+            </a>
+            <!-- Login -->
+            <a href="./login.html" class="w-full sm:w-auto">
+              <button
+                class="border rounded-full px-6 py-3 w-full sm:w-auto font-semibold transition-all duration-300 hover:scale-110 btn-grad"
+                style="
+                  font-family:
+                    Libertinus Math,
+                    system-ui;
+                "
+              >
+                LOGIN
+              </button>
+            </a>
+          </div>
+        </div>
+        <!-- Video -->
+        <div
+          class="w-full lg:w-1/2 max-w-[900px] h-[300px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[650px] overflow-hidden rounded-2xl"
+        >
+          <video
+            src="./aa78a8838f4e1247daa1c7c19a905880_720w.mp4"
+            class="w-full h-full object-cover"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
+        </div>
+      </div>
+    </section>
+
+    <!-- features -->
+    <section id="feat" class="my-30">
+      <h1
+        class="text-4xl text-center sm:text-3xl lg:text-5xl capitalize cinzel leading-tight"
+      >
+        A full bank in your browser
+      </h1>
+      <p
+        class="dm text-center sm:text-md lg:text-xl text-[#d4d4d8] max-w-xl mx-auto mt-3"
+      >
+        From instant transfers to savings goals, Vaultline gives you the tools
+        of a modern bank without the bloat.
+      </p>
+
+      <div class="flex flex-wrap justify-evenly gap-6 my-15 px-20">
+        <div
+          class="c border border-white/10 bg-emerald-950/100 transition-all duration-300 hover:scale-105"
+        >
+          <a
+            href="#"
+            class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base shadow-xs hover:bg-neutral-secondary-medium"
+          >
+            <i class="fa-solid fa-bolt fa-xl"></i>
+
+            <h5
+              class="mb-3 text-2xl font-semibold tracking-tight text-heading leading-8"
+            >
+              Instant Transfers
+            </h5>
+            <p class="text-body text-[#d4d4d8] l">
+              Send money to anyone by their email address. Funds move
+              immediately between Vaultline accounts.
+            </p>
+          </a>
+        </div>
+        <div
+          class="c border border-white/10 bg-emerald-950/100 transition-all duration-300 hover:scale-105"
+        >
+          <a
+            href="#"
+            class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base shadow-xs hover:bg-neutral-secondary-medium"
+          >
+            <i class="fa-solid fa-lock fa-xl"></i>
+
+            <h5
+              class="mb-3 text-2xl font-semibold tracking-tight text-heading leading-8"
+            >
+              PIN-Secured
+            </h5>
+            <p class="text-body text-[#d4d4d8] l">
+              Your account is protected by a 4-digit PIN. No passwords to
+              forget, no data stored on external servers.
+            </p>
+          </a>
+        </div>
+        <div
+          class="c border border-white/10 bg-emerald-950/100 transition-all duration-300 hover:scale-105"
+        >
+          <a
+            href="#"
+            class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base shadow-xs hover:bg-neutral-secondary-medium"
+          >
+            <i class="fa-solid fa-chart-simple fa-xl"></i>
+            <h5
+              class="mb-3 text-2xl font-semibold tracking-tight text-heading leading-8"
+            >
+              Live Ledger
+            </h5>
+            <p class="text-body text-[#d4d4d8] l">
+              Every deposit, withdrawal, and transfer is recorded in a real-time
+              ledger you can filter and review.
+            </p>
+          </a>
+        </div>
+        <div
+          class="c border border-white/10 bg-emerald-950/100 transition-all duration-300 hover:scale-105"
+        >
+          <a
+            href="#"
+            class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base shadow-xs hover:bg-neutral-secondary-medium"
+          >
+            <i class="fa-solid fa-bullseye fa-xl"></i>
+            <h5
+              class="mb-3 text-2xl font-semibold tracking-tight text-heading leading-8"
+            >
+              Savings Goals
+            </h5>
+            <p class="text-body text-[#d4d4d8] l">
+              Set targets and watch your progress fill up. Stay motivated as you
+              save toward what matters.
+            </p>
+          </a>
+        </div>
+        <div
+          class="border border-white/10 bg-emerald-950/100 transition-all duration-300 hover:scale-105"
+        >
+          <a
+            href="#"
+            class="bg-neutral-primary-soft block max-w-sm p-6 ] rounded-base shadow-xs hover:bg-neutral-secondary-medium"
+          >
+            <i class="fa-solid fa-arrow-trend-up fa-xl"></i>
+            <h5
+              class="mb-3 text-2xl font-semibold tracking-tight text-heading leading-8"
+            >
+              Spending Insights
+            </h5>
+            <p class="text-body text-[#d4d4d8] l">
+              See a breakdown of your money flow — total deposits, withdrawals,
+              and net activity at a glance.
+            </p>
+          </a>
+        </div>
+        <div
+          class="border border-white/10 bg-emerald-950/100 transition-all duration-300 hover:scale-105"
+        >
+          <a
+            href="#"
+            class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base shadow-xs hover:bg-neutral-secondary-medium"
+          >
+            <i class="fa-solid fa-shield-halved fa-xl"></i>
+            <h5
+              class="mb-3 text-2xl font-semibold tracking-tight text-heading leading-8"
+            >
+              Overdraft Protection
+            </h5>
+            <p class="text-body text-[#d4d4d8] l">
+              Withdrawals and transfers are blocked if they exceed your balance.
+              You can never go negative.
+            </p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 sm:px-10 lg:px-20 py-16">
+      <div
+        class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16 max-w-7xl mx-auto"
+      >
+        <!-- LEFT IMAGE -->
+        <div class="w-full lg:w-1/2">
+          <div
+            class="w-full h-[350px] sm:h-[450px] lg:h-[500px] overflow-hidden rounded-[2rem] border border-white/10"
+          >
+            <img
+              src="https://images.pexels.com/photos/6969663/pexels-photo-6969663.jpeg?auto=compress&cs=tinysrgb&h=750&w=600"
+              alt="Banking on the go"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- RIGHT CONTENT -->
+        <div class="w-full lg:w-1/2">
+          <!-- Heading -->
+          <h1
+            class="text-4xl text-center sm:text-3xl lg:text-5xl capitalize cinzel leading-tight"
+          >
+            Your money, wherever you are
+          </h1>
+
+          <!-- Description -->
+          <p
+            class="dm text-center sm:text-md lg:text-xl text-[#d4d4d8] max-w-xl mx-auto mt-3"
+          >
+            Vaultline works entirely in your browser — no app to download, no
+            updates to install. Whether you're at home or on the move, your full
+            bank is always one tap away.
+          </p>
+
+          <!-- FEATURES -->
+          <div class="mt-8 space-y-6">
+            <!-- Feature 1 -->
+            <div class="flex items-start gap-4">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-xl bg-orange-950/70 flex items-center justify-center text-orange-400"
+              >
+                <i class="fa-solid fa-mobile-screen fa-lg"></i>
+              </div>
+
+              <div>
+                <h5 class="text-lg sm:text-xl font-semibold text-white">
+                  Works on any device
+                </h5>
+
+                <p class="mt-1 text-sm sm:text-base text-[#a1a1aa]">
+                  Phone, tablet, or desktop — the experience adapts seamlessly.
+                </p>
+              </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="flex items-start gap-4">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-xl bg-orange-950/70 flex items-center justify-center text-orange-400"
+              >
+                <i class="fa-solid fa-sack-dollar fa-lg"></i>
+              </div>
+
+              <div>
+                <h5 class="text-lg sm:text-xl font-semibold text-white">
+                  Send money in seconds
+                </h5>
+
+                <p class="mt-1 text-sm sm:text-base text-[#a1a1aa]">
+                  Just type an email and an amount. Your transfer lands
+                  instantly.
+                </p>
+              </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="flex items-start gap-4">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-xl bg-orange-950/70 flex items-center justify-center text-orange-400"
+              >
+                <i class="fa-solid fa-bell fa-lg"></i>
+              </div>
+
+              <div>
+                <h5 class="text-lg sm:text-xl font-semibold text-white">
+                  Real-time notifications
+                </h5>
+
+                <p class="mt-1 text-sm sm:text-base text-[#a1a1aa]">
+                  Get instant feedback on every transaction right on your
+                  screen.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 py-20">
+      <div class="mx-auto max-w-7xl">
+        <!-- Heading -->
+        <div class="mb-16 text-center">
+          <h1
+            class="text-4xl text-center sm:text-3xl lg:text-5xl capitalize cinzel leading-tight"
+          >
+            How Vaultline works
+          </h1>
+
+          <p
+            class="dm text-center sm:text-md lg:text-xl text-[#d4d4d8] max-w-xl mx-auto mt-3"
+          >
+            Four simple steps from zero to your first transfer.
+          </p>
+        </div>
+
+        <!-- Horizontal Timeline -->
+        <div class="relative">
+          <!-- Connecting line -->
+          <div
+            class="absolute left-[12%] right-[12%] top-6 h-px bg-emerald-400/20"
+          ></div>
+
+          <div class="relative grid grid-cols-1 gap-12 md:grid-cols-4">
+            <!-- STEP 01 -->
+            <div class="relative text-center">
+              <div
+                class="relative z-10 mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-emerald-300/30 bg-emerald-950 text-emerald-300 shadow-[0_0_25px_rgba(16,185,129,0.2)]"
+              >
+                01
+              </div>
+
+              <div
+                class="mt-7 rounded-2xl border border-white/10 bg-white/5 p-6 text-left backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-emerald-400/30"
+              >
+                <p class="text-sm text-emerald-300">STEP 01</p>
+
+                <h3 class="mt-2 text-xl font-semibold text-white">
+                  Create Account
+                </h3>
+
+                <p class="mt-3 text-sm leading-6 text-white/50">
+                  Enter your name, email, and pick a 4-digit PIN. That's it — no paperwork.
+                </p>
+              </div>
+            </div>
+
+            <!-- STEP 02 -->
+            <div class="relative text-center">
+              <div
+                class="relative z-10 mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-emerald-300/30 bg-emerald-950 text-emerald-300 shadow-[0_0_25px_rgba(16,185,129,0.2)]"
+              >
+                02
+              </div>
+
+              <div
+                class="mt-7 rounded-2xl border border-white/10 bg-white/5 p-6 text-left backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-emerald-400/30"
+              >
+                <p class="text-sm text-emerald-300">STEP 02</p>
+
+                <h3 class="mt-2 text-xl font-semibold text-white">Get a Number</h3>
+
+                <p class="mt-3 text-sm leading-6 text-white/50">
+                  You're assigned a unique 10-digit account number instantly.
+                </p>
+              </div>
+            </div>
+
+            <!-- STEP 03 -->
+            <div class="relative text-center">
+              <div
+                class="relative z-10 mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-emerald-300/30 bg-emerald-950 text-emerald-300 shadow-[0_0_25px_rgba(16,185,129,0.2)]"
+              >
+                03
+              </div>
+
+              <div
+                class="mt-7 rounded-2xl border border-white/10 bg-white/5 p-6 text-left backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-emerald-400/30"
+              >
+                <p class="text-sm text-emerald-300">STEP 03</p>
+
+                <h3 class="mt-2 text-xl font-semibold text-white">
+Deposit Funds                </h3>
+
+                <p class="mt-3 text-sm leading-6 text-white/50">
+                  Add money to your balance and start using your account right away.
+                </p>
+              </div>
+            </div>
+
+            <!-- STEP 04 -->
+            <div class="relative text-center">
+              <div
+                class="relative z-10 mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-emerald-300/30 bg-emerald-400 text-emerald-950 shadow-[0_0_30px_rgba(52,211,153,0.5)]"
+              >
+                04
+              </div>
+
+              <div
+                class="mt-7 rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-6 text-left backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-emerald-400/40"
+              >
+                <p class="text-sm text-emerald-300">FINAL STEP</p>
+
+                <h3 class="mt-2 text-xl font-semibold text-white">
+Transfer & Save                </h3>
+
+                <p class="mt-3 text-sm leading-6 text-white/60">
+                  Send money by email, set savings goals, and track every cent
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 py-20">
+    <h1
+            class="text-4xl text-center sm:text-3xl lg:text-5xl capitalize cinzel leading-tight"
+          >
+Frequently asked questions        </h1>
+
+        
+
+<div class="m-15 ">
+    <div id="accordion-card" data-accordion="collapse">
+  <h2 id="accordion-card-heading-1">
+    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-body rounded-base shadow-xs border border-default hover:text-heading hover:bg-neutral-secondary-medium gap-3 [&[aria-expanded='true']]:rounded-b-none [&[aria-expanded='true']]:shadow-none" data-accordion-target="#accordion-card-body-1" aria-expanded="true" aria-controls="accordion-card-body-1">
+      <span>Is my money safe with Vaultline?</span>
+      <svg data-accordion-icon class="w-5 h-5 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/></svg>
+    </button>
+  </h2>
+  <div id="accordion-card-body-1" class="hidden border border-t-0 border-default rounded-b-base shadow-xs" aria-labelledby="accordion-card-heading-1">
+    <div class="p-4 md:p-5">
+      <p class="mb-2 text-body text-white">Vaultline is a demo banking app — all data is stored locally in your browser's localStorage. It's perfect for trying out banking features, but it's not a real financial institution and doesn't hold real money </p>
+    </div>
+  </div>
+  <h2 id="accordion-card-heading-2" class="mt-4">
+    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-body rounded-base shadow-xs border border-default hover:text-heading hover:bg-neutral-secondary-medium gap-3 [&[aria-expanded='true']]:rounded-b-none [&[aria-expanded='true']]:shadow-none" data-accordion-target="#accordion-card-body-2" aria-expanded="false" aria-controls="accordion-card-body-2">
+      <span>Do I need to install anything??</span>
+      <svg data-accordion-icon class="w-5 h-5 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/></svg>
+    </button>
+  </h2>
+  <div id="accordion-card-body-2" class="hidden border border-t-0 border-default rounded-b-base shadow-xs" aria-labelledby="accordion-card-heading-2">
+    <div class="p-4 md:p-5">
+      <p class="mb-2 text-body text-white">
+No installation required. Vaultline runs entirely in your browser. Just open the page, create an account, and start using it immediately.</p>
+    </div>
+  </div>
+  <h2 id="accordion-card-heading-3" class="mt-4">
+    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-body rounded-base shadow-xs border border-default hover:text-heading hover:bg-neutral-secondary-medium gap-3 [&[aria-expanded='true']]:rounded-b-none [&[aria-expanded='true']]:shadow-none" data-accordion-target="#accordion-card-body-3" aria-expanded="false" aria-controls="accordion-card-body-3">
+      <span>Can I transfer to other people??</span>
+      <svg data-accordion-icon class="w-5 h-5 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/></svg>
+    </button>
+  </h2>
+  <div id="accordion-card-body-3" class="hidden border border-t-0 border-default rounded-b-base shadow-xs" aria-labelledby="accordion-card-heading-3">
+    <div class="p-4 md:p-5">
+      <p class="mb-2 text-body text-white">Yes — you can transfer funds to anyone who has a Vaultline account by using their email address. Since data is stored per-browser, transfers work between accounts on the same device.</p>
+      <p class="mb-2 text-body">Learn more about these technologies:</p>
+      
+    </div>
+  </div>
+</div>
+</div>
+
+</section>
+
+<!-- REVIEWS SECTION -->
+<section class="px-6 sm:px-10 lg:px-20 py-20">
+
+  <!-- Section Heading -->
+  <div class="text-center max-w-2xl mx-auto">
+   
+<h1
+  class="cinzel mx-auto w-full text-center text-4xl capitalize
+         sm:text-3xl lg:text-5xl"
+>
+  What people are saying
+</h1>
+  </div>
+
+
+  <!-- REVIEW CARDS -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mt-12">
+
+    <!-- Review 1 -->
+    <div
+      class="p-7 rounded-2xl border border-white/10 bg-emerald-950/60 hover:bg-emerald-950 transition-all duration-300 hover:-translate-y-2"
+    >
+
+      <!-- Stars -->
+      <div class="flex gap-1 text-orange-400 mb-5">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
+
+      <p class="dm text-[#d4d4d8] leading-relaxed">
+        "Vaultline makes sending money incredibly simple. I don't need
+        to install an app or remember another password."
+      </p>
+
+      <div class="flex items-center gap-4 mt-6">
+
+        <div
+          class="w-11 h-11 rounded-full bg-orange-950 flex items-center justify-center text-orange-400 font-bold"
+        >
+          AS
+        </div>
+
+        <div>
+          <h5 class="text-white font-semibold">
+            Alex Smith
+          </h5>
+
+          <p class="text-sm text-[#71717a]">
+            Vaultline User
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Review 2 -->
+    <div
+      class="p-7 rounded-2xl border border-white/10 bg-emerald-950/60 hover:bg-emerald-950 transition-all duration-300 hover:-translate-y-2"
+    >
+
+      <div class="flex gap-1 text-orange-400 mb-5">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
+
+      <p class="dm text-[#d4d4d8] leading-relaxed">
+        "The interface is clean and fast. I can check my balance and
+        transfer money in just a few seconds."
+      </p>
+
+      <div class="flex items-center gap-4 mt-6">
+
+        <div
+          class="w-11 h-11 rounded-full bg-orange-950 flex items-center justify-center text-orange-400 font-bold"
+        >
+          EM
+        </div>
+
+        <div>
+          <h5 class="text-white font-semibold">
+            Emily Martin
+          </h5>
+
+          <p class="text-sm text-[#71717a]">
+            Vaultline User
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Review 3 -->
+    <div
+      class="p-7 rounded-2xl border border-white/10 bg-emerald-950/60 hover:bg-emerald-950 transition-all duration-300 hover:-translate-y-2"
+    >
+
+      <div class="flex gap-1 text-orange-400 mb-5">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
+
+      <p class="dm text-[#d4d4d8] leading-relaxed">
+        "I love that everything works directly in the browser. The
+        real-time notifications are especially useful."
+      </p>
+
+      <div class="flex items-center gap-4 mt-6">
+
+        <div
+          class="w-11 h-11 rounded-full bg-orange-950 flex items-center justify-center text-orange-400 font-bold"
+        >
+          RJ
+        </div>
+
+        <div>
+          <h5 class="text-white font-semibold">
+            Ryan Johnson
+          </h5>
+
+          <p class="text-sm text-[#71717a]">
+            Vaultline User
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- FOOTER -->
+<footer class="bg-emerald-950 border border-white/10 rounded-2xl shadow-xl ">
+
+  <div class="w-full max-w-screen-xl mx-auto p-6 md:py-8">
+
+    <!-- TOP -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+
+      <!-- LOGO / BRAND -->
+      <a
+        href="#"
+        class="flex items-center space-x-3 rtl:space-x-reverse"
+      >
+        <!-- Vaultline Icon -->
+       
+
+        <span class="cinzel text-2xl font-semibold whitespace-nowrap text-white">
+          Vaultline</span>
+        </span>
+      </a>
+
+
+      <!-- NAVIGATION -->
+      <ul
+        class="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-[#a1a1aa]"
+      >
+
+        <li>
+          <a href="#" class="hover:text-orange-400 transition">
+            About
+          </a>
+        </li>
+
+        <li>
+          <a href="#feat" class="hover:text-orange-400 transition">
+            Features
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="hover:text-orange-400 transition">
+            Privacy Policy
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="hover:text-orange-400 transition">
+            Terms
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="hover:text-orange-400 transition">
+            Contact
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <!-- DIVIDER -->
+    <hr class="my-6 border-white/10 sm:mx-auto lg:my-8" />
+
+
+    <!-- BOTTOM -->
+    <div
+      class="flex flex-col sm:flex-row items-center justify-between gap-4"
+    >
+
+      <span class="block text-sm text-[#71717a] text-center sm:text-left">
+        © 2026
+        <a href="#" class="text-white hover:text-orange-400 transition">
+          Vaultline
+        </a>.
+        All Rights Reserved.
+      </span>
+
+
+      <!-- SOCIAL ICONS -->
+      <div class="flex items-center gap-4">
+
+        <a
+          href="#"
+          aria-label="Instagram"
+          class="text-[#71717a] hover:text-orange-400 transition"
+        >
+          <i class="fa-brands fa-instagram fa-lg"></i>
+        </a>
+
+        <a
+          href="#"
+          aria-label="Twitter"
+          class="text-[#71717a] hover:text-orange-400 transition"
+        >
+          <i class="fa-brands fa-twitter fa-lg"></i>
+        </a>
+
+        <a
+          href="#"
+          aria-label="GitHub"
+          class="text-[#71717a] hover:text-orange-400 transition"
+        >
+          <i class="fa-brands fa-github fa-lg"></i>
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+
+</body>
+</html>
