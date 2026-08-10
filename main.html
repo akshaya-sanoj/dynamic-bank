@@ -26,33 +26,14 @@
         <span class="text-2xl font-bold text-[#D4AF37]">VAULTLINE</span>
       </div>
       <div class="flex items-center space-x-4">
-        <span id="welcomeMsg" class="text-gray-300 font-medium">Welcome, User</span>
+        <span id="welcomeMsg" class="text-gray-300 font-medium">Welcome,</span>
         <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm transition">
           <i class="fa-solid fa-right-from-bracket mr-1"></i> Logout
         </button>
       </div>
     </nav>
 
-    <div class="max-w-6xl mx-auto p-6 space-y-6">
-      <!-- Account Overview Card -->
-      <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
-        <h2 class="text-xl font-semibold text-[#D4AF37] mb-2">Account Summary</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <p class="text-sm text-gray-400">Account Holder</p>
-            <p id="dispUname" class="text-lg font-bold text-white">-</p>
-          </div>
-          <div>
-            <p class="text-sm text-gray-400">Account Number</p>
-            <p id="dispAnum" class="text-lg font-bold text-white">-</p>
-          </div>
-          <div>
-            <p class="text-sm text-gray-400">Current Balance</p>
-            <p id="dispBalance" class="text-2xl font-extrabold text-emerald-400">₹0</p>
-          </div>
-        </div>
-      </div>
-
+   <h1 id="head1" class="text-center text-5xl capitalize my-10 font-bold"></h1>
       <!-- Action Cards (Deposit & Withdraw) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Deposit Form -->
@@ -103,7 +84,8 @@
       </div>
 
       <!-- Transaction History Table -->
-      <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
+      <section class="my-20">
+        <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
         <h3 class="text-lg font-bold text-[#D4AF37] mb-4">Transaction History</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm text-left text-gray-300">
@@ -123,6 +105,21 @@
           </table>
         </div>
       </div>
+      </section>
     </div>
+
+
+
+ <script src="./script.js"></script>
+    <script>
+      const user = localStorage.getItem("usrname");
+
+      if (!user) {
+        window.location.href = "./login.html";
+      } else {
+        document.getElementById("head1").innerHTML = `Welcome ${user}`;
+      }
+    </script>
+
   </body>
 </html>
