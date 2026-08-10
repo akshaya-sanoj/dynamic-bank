@@ -250,25 +250,6 @@ function withdraw(){
 }
 
 
-// Render transaction history table
-function displayHistory(transactions) {
-  const tableBody = document.getElementById("trans_history");
-  if (!tableBody) return;
-
-  if (!transactions || transactions.length === 0) {
-    tableBody.innerHTML = `<tr><td colspan="4" class="text-center py-4">No transactions yet.</td></tr>`;
-    return;
-  }
-
-  tableBody.innerHTML = transactions.map((t) => `
-    <tr class="border-b border-slate-700 hover:bg-slate-800">
-      <td class="p-3">${t.date}</td>
-      <td class="p-3 font-semibold ${t.type === 'Deposit' ? 'text-emerald-400' : 'text-red-400'}">${t.type}</td>
-      <td class="p-3">₹${t.amount}</td>
-      <td class="p-3">₹${t.balance}</td>
-    </tr>
-  `).join("");
-}
 
 
 function logout() {
@@ -280,11 +261,3 @@ function logout() {
 }
 
 
-// Auto-load history on page load for logged-in user
-window.onload = function() {
-  const currentAcc = localStorage.getItem("currentUser");
-  if (currentAcc && localStorage.getItem(currentAcc)) {
-    const user = JSON.parse(localStorage.getItem(currentAcc));
-    displayHistory(user.transactions || []);
-  }
-};
