@@ -87,6 +87,7 @@ function login() {
         ) {
             // Save current session account number for main.html
             localStorage.setItem("currentUser", user1.actnumber);
+            localStorage.setItem("usrname", user1.uname);
             alert("Login successful");
             window.location.href = "main.html";
 
