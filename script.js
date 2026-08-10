@@ -1,287 +1,263 @@
-// Function to generate a unique random 5-digit account number
 function acctnumber() {
     let acctnum;
+
     do {
         acctnum = Math.floor(10000 + Math.random() * 90000).toString();
     } while (localStorage.getItem(acctnum));
+
     return acctnum;
 }
 
-// User Registration
-function register() {
-    const username = document.getElementById("uname");
-    const email = document.getElementById("mail");
-    const password = document.getElementById("pswd");
-    const confirmpassword = document.getElementById("cpswd");
 
+function register() {
     let anum = acctnumber();
 
     const user = {
         uname: username.value,
         email: email.value,
         pass: password.value,
-        cpass: confirmpassword ? confirmpassword.value : password.value,
+        cpass: confirmpassword.value,
         actnumber: anum,
         balance: 0,
         transactions: []
     };
 
-    if (user.uname === "" || user.email === "" || user.pass === "") {
+    console.log(user);
+
+    // Check empty fields
+    if (
+        user.uname == "" ||
+        user.email == "" ||
+        user.pass == "" ||
+        user.cpass == ""
+    ) {
         alert("Please fill the form");
         return;
     }
 
-    if (user.pass !== user.cpass) {
+    // Check passwords match
+    if (user.pass != user.cpass) {
         alert("Passwords do not match");
         return;
     }
 
+    // Store account in localStorage
     localStorage.setItem(anum, JSON.stringify(user));
-    alert("Registration successful! \nYour Account number = " + anum);
+
+    console.log(user);
+
+    alert("Registration successful! \n Your Account number = " + anum);
     window.location.href = "login.html";
 }
 
-// User Login
-function login(event) {
-    if (event) event.preventDefault();
 
-    const uname = document.getElementById("uname");
-    const anum = document.getElementById("anum");
-    const mail = document.getElementById("mail");
-    const pswd = document.getElementById("pswd");
+function login() {
 
     const logi = {
-        usrname: uname ? uname.value : "",
-        acttnum: anum ? anum.value : "",
-        mail: mail ? mail.value : "",
-        passwd: pswd ? pswd.value : ""
+        usrname: uname.value,
+        acttnum: anum.value,
+        mail: mail.value,
+        passwd: pswd.value
     };
 
-    if (logi.acttnum === "" || logi.mail === "" || logi.passwd === "" || logi.usrname === "") {
+    // Check empty fields (Added return)
+    if (
+        logi.acttnum == "" ||
+        logi.mail == "" ||
+        logi.passwd == "" ||
+        logi.usrname == ""
+    ) {
         alert("Please fill the form");
         return;
     }
 
+    // Check account number
     if (localStorage.getItem(logi.acttnum)) {
-        const user1 = JSON.parse(localStorage.getItem(logi.acttnum));
 
+        const user1 = JSON.parse(
+            localStorage.getItem(logi.acttnum)
+        );
+
+        // Check all details match
         if (
-            user1.pass === logi.passwd &&
-            user1.uname === logi.usrname &&
-            user1.actnumber === logi.acttnum &&
-            user1.email === logi.mail
+            user1.pass == logi.passwd &&
+            user1.uname == logi.usrname &&
+            user1.actnumber == logi.acttnum &&
+            user1.email == logi.mail
         ) {
+            // Save current session account number for main.html
             localStorage.setItem("currentUser", user1.actnumber);
             alert("Login successful");
             window.location.href = "main.html";
+
         } else {
-            alert("Incorrect username, email, account number, or password");
+            alert("Incorrect username, email, account number or password");
         }
+
     } else {
         alert("User not found. Please register first.");
     }
 }
 
-// Load Account Summary & Session Data on main.html
-function initDashboard() {
-    const currentAccount = localStorage.getItem("currentUser");
+
+function deposit(){
+  const details = {
+    amt: depo.value,
+    acnum: depo_acnum.value,
+    password: depo_password.value
+  };
+
+  if(
+    details.acnum == "" ||
+    details.amt == "" ||
+    details.password == ""
+  ){
+    alert("Please fill the details");
+    return;
+  }
+
+  if(localStorage.getItem(details.acnum)){
+    const use = JSON.parse(localStorage.getItem(details.acnum));
+
+    if(use.pass != details.password){
+      alert("Incorrect Password");
+      return;
+    }
+
+    if(Number(details.amt) <= 0){
+      alert("enter a valid amount!!");
+      return;
+    }
+
+    // Update Balance
+    use.balance += Number(details.amt);
+
+    if(!use.transactions) {
+      use.transactions = [];
+    }
+
+    // Add new deposit entry
+    use.transactions.push({
+      type: "Deposit",
+      amount: Number(details.amt),
+      date: new Date().toLocaleString(),
+      balance: use.balance
+    });
     
-    // Redirect if accessing main.html without logging in
-    if (!currentAccount) {
-        if (window.location.pathname.includes("main.html")) {
-            window.location.href = "login.html";
-        }
-        return;
+    // Save updated user 
+    localStorage.setItem(details.acnum, JSON.stringify(use));
+
+    // Display balance card
+    let msg = document.getElementById("bal");
+    if (msg) {
+        msg.style.display = "block";
+        msg.innerHTML = `
+            <h5>CURRENT BALANCE</h5>
+            <p><b>Balance:</b> ₹${use.balance}</p>
+        `;
     }
 
-    const userData = JSON.parse(localStorage.getItem(currentAccount));
-    if (!userData) return;
+    // Render updated transaction history
+    displayHistory(use.transactions);
 
-    // Populate dashboard header card
-    const welcomeMsg = document.getElementById("welcomeMsg");
-    const dispUname = document.getElementById("dispUname");
-    const dispAnum = document.getElementById("dispAnum");
-    const dispBalance = document.getElementById("dispBalance");
+    alert("Deposit successful!");
 
-    if (welcomeMsg) welcomeMsg.textContent = `Welcome, ${userData.uname}`;
-    if (dispUname) dispUname.textContent = userData.uname;
-    if (dispAnum) dispAnum.textContent = userData.actnumber;
-    if (dispBalance) dispBalance.textContent = `₹${userData.balance}`;
+    // Clear inputs
+    depo.value = ""; 
+    depo_acnum.value = ""; 
+    depo_password.value = "";
 
-    // Auto-fill account number inputs for convenience
-    const depoAcnum = document.getElementById("depo_acnum");
-    const withAcnum = document.getElementById("with_acnum");
-    if (depoAcnum) depoAcnum.value = userData.actnumber;
-    if (withAcnum) withAcnum.value = userData.actnumber;
-
-    // Display transaction history
-    displayHistory(userData.transactions || []);
+  } else {
+    alert("account not found");
+  }
 }
 
-// Render Transaction History to Table
-function displayHistory(transactions) {
-    const tableBody = document.getElementById("txHistoryTable");
-    if (!tableBody) return;
 
-    if (!transactions || transactions.length === 0) {
-        tableBody.innerHTML = `
-            <tr>
-                <td colspan="4" class="px-4 py-4 text-center text-gray-500">No transactions recorded yet.</td>
-            </tr>`;
-        return;
+function withdraw(){
+  const withdet = {
+    withamt: with_amt.value,
+    withact: with_acnum.value,
+    withpass: with_pass.value
+  };
+
+  if(
+    withdet.withact == "" ||
+    withdet.withamt == "" ||
+    withdet.withpass == ""
+  ){
+    alert("Please fill the details");
+    return;
+  }
+
+  if(localStorage.getItem(withdet.withact)){
+    const uses = JSON.parse(localStorage.getItem(withdet.withact));
+
+    if(uses.pass != withdet.withpass){
+      alert("Incorrect Password");
+      return;
     }
 
-    tableBody.innerHTML = transactions
-        .slice()
-        .reverse()
-        .map(tx => {
-            const isDeposit = tx.type === "Deposit";
-            const typeColor = isDeposit ? "text-emerald-400" : "text-red-400";
-            const sign = isDeposit ? "+" : "-";
+    if(Number(withdet.withamt) <= 0){
+      alert("enter a valid amount!!");
+      return;
+    }
 
-            return `
-                <tr class="border-b border-gray-700 hover:bg-gray-750">
-                    <td class="px-4 py-3 font-medium ${typeColor}">${tx.type}</td>
-                    <td class="px-4 py-3 ${typeColor}">${sign}₹${tx.amount}</td>
-                    <td class="px-4 py-3 text-gray-400">${tx.date}</td>
-                    <td class="px-4 py-3 font-semibold text-white">₹${tx.balance}</td>
-                </tr>
-            `;
-        })
-        .join("");
+    if(Number(withdet.withamt) > Number(uses.balance)){
+      alert("Insufficient Balance!");
+      return;
+    }
+
+    // Deduct balance
+    uses.balance -= Number(withdet.withamt);
+
+    if(!uses.transactions) {
+      uses.transactions = [];
+    }
+
+    // Add new withdrawal entry
+    uses.transactions.push({
+      type: "Withdrawal",
+      amount: Number(withdet.withamt),
+      date: new Date().toLocaleString(),
+      balance: uses.balance
+    });
+
+    localStorage.setItem(withdet.withact, JSON.stringify(uses));
+
+    // Display balance card
+    let msg = document.getElementById("bal1");
+    if (msg) {
+        msg.style.display = "block";
+        msg.innerHTML = `
+            <h5>CURRENT BALANCE</h5>
+            <p><b>Balance:</b> ₹${uses.balance}</p>
+        `;
+    }
+
+    // Render updated transaction history
+    displayHistory(uses.transactions);
+
+    alert("Withdrawal successful!");
+
+    // Clear inputs
+    with_amt.value = ""; 
+    with_acnum.value = ""; 
+    with_pass.value = "";
+
+  } else {
+    alert("account not found");
+  }
 }
 
-// Deposit Money
-function deposit() {
-    const depo = document.getElementById("depo");
-    const depo_acnum = document.getElementById("depo_acnum");
-    const depo_password = document.getElementById("depo_password");
 
-    const details = {
-        amt: depo.value,
-        acnum: depo_acnum.value,
-        password: depo_password.value
-    };
 
-    if (details.acnum === "" || details.amt === "" || details.password === "") {
-        alert("Please fill the details");
-        return;
-    }
 
-    if (localStorage.getItem(details.acnum)) {
-        const use = JSON.parse(localStorage.getItem(details.acnum));
-
-        if (use.pass !== details.password) {
-            alert("Incorrect Password");
-            return;
-        }
-
-        if (Number(details.amt) <= 0) {
-            alert("Enter a valid amount!");
-            return;
-        }
-
-        use.balance += Number(details.amt);
-        if (!use.transactions) use.transactions = [];
-
-        use.transactions.push({
-            type: "Deposit",
-            amount: Number(details.amt),
-            date: new Date().toLocaleString(),
-            balance: use.balance
-        });
-
-        localStorage.setItem(details.acnum, JSON.stringify(use));
-
-        let msg = document.getElementById("bal");
-        if (msg) {
-            msg.style.display = "block";
-            msg.innerHTML = `<b>Updated Balance:</b> ₹${use.balance}`;
-        }
-
-        alert("Deposit successful!");
-
-        depo.value = "";
-        depo_password.value = "";
-
-        // Reload updated balance & table
-        initDashboard();
-    } else {
-        alert("Account not found");
-    }
-}
-
-// Withdraw Money
-function withdraw() {
-    const with_amt = document.getElementById("with_amt");
-    const with_acnum = document.getElementById("with_acnum");
-    const with_pass = document.getElementById("with_pass");
-
-    const withdet = {
-        withamt: with_amt.value,
-        withact: with_acnum.value,
-        withpass: with_pass.value
-    };
-
-    if (withdet.withact === "" || withdet.withamt === "" || withdet.withpass === "") {
-        alert("Please fill the details");
-        return;
-    }
-
-    if (localStorage.getItem(withdet.withact)) {
-        const uses = JSON.parse(localStorage.getItem(withdet.withact));
-
-        if (uses.pass !== withdet.withpass) {
-            alert("Incorrect Password");
-            return;
-        }
-
-        if (Number(withdet.withamt) <= 0) {
-            alert("Enter a valid amount!");
-            return;
-        }
-
-        if (Number(withdet.withamt) > Number(uses.balance)) {
-            alert("Insufficient Balance!");
-            return;
-        }
-
-        uses.balance -= Number(withdet.withamt);
-        if (!uses.transactions) uses.transactions = [];
-
-        uses.transactions.push({
-            type: "Withdrawal",
-            amount: Number(withdet.withamt),
-            date: new Date().toLocaleString(),
-            balance: uses.balance
-        });
-
-        localStorage.setItem(withdet.withact, JSON.stringify(uses));
-
-        let msg = document.getElementById("bal1");
-        if (msg) {
-            msg.style.display = "block";
-            msg.innerHTML = `<b>Updated Balance:</b> ₹${uses.balance}`;
-        }
-
-        alert("Withdrawal successful!");
-
-        with_amt.value = "";
-        with_pass.value = "";
-
-        // Reload updated balance & table
-        initDashboard();
-    } else {
-        alert("Account not found");
-    }
-}
-
-// Logout Action
 function logout() {
-    localStorage.removeItem("currentUser");
-    alert("Logged out successfully!");
-    window.location.href = "login.html";
+  // Clear only current active session
+  localStorage.removeItem("currentUser");
+
+  alert("Logged out successfully!");
+  window.location.href = "index.html"; 
 }
 
-// Initialize Dashboard when DOM loads
-document.addEventListener("DOMContentLoaded", initDashboard);
+
