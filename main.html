@@ -1,123 +1,146 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VAULTLINE - Dashboard</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaultline - Dashboard</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- Tailwind CSS -->
+    <!-- Tailwind -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Flowbite -->
     <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body class="bg-gray-900 text-white min-h-screen">
-    <!-- Navigation Bar -->
-    <nav class="bg-emerald-950 border-b border-gray-800 px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center space-x-3">
-        <img class="w-8 h-8" src="./watermarked_img_10565261629110271654-removebg-preview.png" alt="logo" />
-        <span class="text-2xl font-bold text-[#D4AF37]">VAULTLINE</span>
-      </div>
-      <div class="flex items-center space-x-4">
-        <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm transition">
-          <i class="fa-solid fa-right-from-bracket mr-1"></i> Logout
-        </button>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-slate-900 text-white min-h-screen">
+
+    <nav class="w-full px-6 py-4 rounded-3xl sticky top-0 z-50 border border-white/10 bg-emerald-950">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img src="./watermarked_img_10565261629110271654-removebg-preview.png" style="width: 70px; height: 60px" class="object-contain" />
+          <h1 class="text-xl font-semibold py-3" style="font-family: 'Libre Baskerville', serif;">
+            VAULTLINE
+          </h1>
+        </div>
+        <div class="flex justify-evenly gap-5">
+          <div>
+            <button id="theme-toggle" class="border p-3 w-20 rounded-full transition-all duration-300 hover:scale-110 btn-grad">
+              <i id="theme-icon" class="fa-solid fa-moon transition-transform duration-500"></i>
+            </button>
+          </div>
+          <div>
+            <a href="./login.html">
+              <button onclick="logout()" class="border rounded-full p-3 w-30 font-semibold transition-all duration-300 hover:scale-110 btn-grad">
+                LOGOUT
+              </button>
+            </a>
+          </div>
+        </div>
       </div>
     </nav>
 
-   <h1 id="head1" class="text-center text-5xl capitalize my-10 font-bold"></h1>
-      <!-- Action Cards (Deposit & Withdraw) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Deposit Form -->
-        <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg space-y-4">
-          <h3 class="text-lg font-bold text-emerald-400 flex items-center">
-            <i class="fa-solid fa-arrow-down-left mr-2"></i> Deposit Money
-          </h3>
-          <div>
-            <label class="block text-sm font-medium mb-1">Account Number</label>
-            <input type="number" id="depo_acnum" placeholder="Account Number" class="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-white" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">Amount (₹)</label>
-            <input type="number" id="depo" placeholder="Enter amount" class="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-white" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">Password</label>
-            <input type="password" id="depo_password" placeholder="••••••••" class="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-white" />
-          </div>
-          <button onclick="deposit()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 rounded-lg transition">
-            Deposit
-          </button>
-          <div id="bal" class="hidden p-3 bg-emerald-900/50 border border-emerald-500/50 rounded-lg text-sm text-emerald-200"></div>
-        </div>
+    <h1 id="head1" class="text-center text-5xl capitalize my-5 font-bold"></h1>
 
-        <!-- Withdraw Form -->
-        <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg space-y-4">
-          <h3 class="text-lg font-bold text-red-400 flex items-center">
-            <i class="fa-solid fa-arrow-up-right mr-2"></i> Withdraw Money
-          </h3>
-          <div>
-            <label class="block text-sm font-medium mb-1">Account Number</label>
-            <input type="number" id="with_acnum" placeholder="Account Number" class="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-white" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">Amount (₹)</label>
-            <input type="number" id="with_amt" placeholder="Enter amount" class="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-white" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">Password</label>
-            <input type="password" id="with_pass" placeholder="••••••••" class="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-white" />
-          </div>
-          <button onclick="withdraw()" class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2.5 rounded-lg transition">
-            Withdraw
-          </button>
-          <div id="bal1" class="hidden p-3 bg-red-900/50 border border-red-500/50 rounded-lg text-sm text-red-200"></div>
-        </div>
+    <div class="max-w-md mx-auto mb-10 px-6">
+      <div id="currentBalance" class="border rounded-2xl bg-slate-800/50 p-6 text-center">
+        <h5 class="text-sm uppercase tracking-wide text-slate-400 mb-2">Current Balance</h5>
+        <p class="text-4xl font-bold text-emerald-400">₹0</p>
       </div>
-
-      <!-- Transaction History Table -->
-      <section class="my-20">
-        <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
-        <h3 class="text-lg font-bold text-[#D4AF37] mb-4">Transaction History</h3>
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm text-left text-gray-300">
-            <thead class="text-xs uppercase bg-gray-700 text-gray-400">
-              <tr>
-                <th scope="col" class="px-4 py-3">Type</th>
-                <th scope="col" class="px-4 py-3">Amount</th>
-                <th scope="col" class="px-4 py-3">Date & Time</th>
-                <th scope="col" class="px-4 py-3">Balance After</th>
-              </tr>
-            </thead>
-            <tbody id="txHistoryTable">
-              <tr>
-                <td colspan="4" class="px-4 py-4 text-center text-gray-500">No transactions recorded yet.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      </section>
     </div>
 
+    <section class="mb-12">
+      <div class="flex flex-wrap justify-evenly items-start gap-8 px-6">
+        
+        <!-- DEPOSIT FORM -->
+        <div class="border p-10 rounded-2xl bg-slate-800/50 w-full max-w-md">
+          <form class="max-w-sm mx-auto">
+            <h3 class="text-center text-2xl cinzel my-5 font-semibold">DEPOSIT</h3>
+            <div class="mb-5">
+              <label class="block mb-2 text-sm font-medium">Deposit Amount</label>
+              <input type="number" id="depo" class="border text-sm rounded-lg block w-full p-2.5 bg-slate-700 text-white" placeholder="Deposit Amount" required />
+
+              <label class="block mb-2 mt-4 text-sm font-medium">Your Account Number</label>
+              <input type="number" id="depo_acnum" class="border text-sm rounded-lg block w-full p-2.5 bg-slate-700 text-white" placeholder="Account Number" required />
+            </div>
+            <div class="mb-5">
+              <label class="block mb-2 text-sm font-medium">Your Password</label>
+              <input type="password" id="depo_password" class="border text-sm rounded-lg block w-full p-2.5 bg-slate-700 text-white" placeholder="••••••••" required />
+            </div>
+            <button onclick="deposit()" type="button" class="w-full text-white bg-emerald-600 hover:bg-emerald-700 font-medium rounded-lg text-sm px-5 py-2.5 transition-all">DEPOSIT</button>
+
+            <div id="bal" style="display: none;" class="mt-4 p-4 border rounded-lg bg-slate-700 text-center"></div>
+            
+          </form>
+        </div>
+
+        <!-- WITHDRAW FORM -->
+        <div class="border p-10 rounded-2xl bg-slate-800/50 w-full max-w-md">
+          <form class="max-w-sm mx-auto">
+            <h3 class="text-center text-2xl cinzel my-5 font-semibold">WITHDRAW</h3>
+            <div class="mb-5">
+              <label class="block mb-2 text-sm font-medium">Withdraw Amount</label>
+              <input type="number" id="with_amt" class="border text-sm rounded-lg block w-full p-2.5 bg-slate-700 text-white" placeholder="Amount" required />
+
+              <label class="block mb-2 mt-4 text-sm font-medium">Your Account Number</label>
+              <input type="number" id="with_acnum" class="border text-sm rounded-lg block w-full p-2.5 bg-slate-700 text-white" placeholder="Account Number" required />
+            </div>
+            <div class="mb-5">
+              <label class="block mb-2 text-sm font-medium">Your Password</label>
+              <input type="password" id="with_pass" class="border text-sm rounded-lg block w-full p-2.5 bg-slate-700 text-white" placeholder="••••••••" required />
+            </div>
+            <button onclick="withdraw()" type="button" class="w-full text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 transition-all">WITHDRAW</button>
+                      <div id="bal1" style="display: none;" class="mt-4 p-4 border rounded-lg bg-slate-700 text-center"></div>
+
+          </form>
+        </div>
+
+      </div>
+    </section>
 
 
- <script src="./script.js"></script>
+
+
+    <section class="max-w-4xl mx-auto my-10 px-6">
+  <h2 class="text-2xl font-bold text-center mb-6 cinzel">Transaction History</h2>
+  <div class="overflow-x-auto border rounded-xl bg-slate-800/50 p-4">
+    <table class="w-full text-left text-sm">
+      <thead class="border-b border-slate-600 text-slate-300">
+        <tr>
+          <th class="p-3">Date & Time</th>
+          <th class="p-3">Type</th>
+          <th class="p-3">Amount</th>
+          <th class="p-3">Remaining Balance</th>
+        </tr>
+      </thead>
+      <tbody id="trans_history">
+        <tr>
+          <td colspan="4" class="text-center py-4 text-slate-400">No transactions recorded yet.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+    <!-- Script File Linked at Bottom -->
+    <script src="./script.js"></script>
     <script>
       const user = localStorage.getItem("usrname");
+      const acctnum = localStorage.getItem("currentUser");
 
-      if (!user) {
+      if (!user || !acctnum) {
         window.location.href = "./login.html";
       } else {
         document.getElementById("head1").innerHTML = `Welcome ${user}`;
+        renderCurrentBalance(acctnum);
+        const acc = JSON.parse(localStorage.getItem(acctnum) || "null");
+        if (acc) displayHistory(acc.transactions);
       }
     </script>
-
-  </body>
+</body>
 </html>

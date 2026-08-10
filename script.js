@@ -101,6 +101,8 @@ function login() {
 }
 
 
+
+
 function deposit(){
   const details = {
     amt: depo.value,
@@ -144,8 +146,8 @@ function deposit(){
       date: new Date().toLocaleString(),
       balance: use.balance
     });
-    
-    // Save updated user 
+
+    // Save updated user
     localStorage.setItem(details.acnum, JSON.stringify(use));
 
     // Display balance card
@@ -161,11 +163,14 @@ function deposit(){
     // Render updated transaction history
     displayHistory(use.transactions);
 
+    // Keep the persistent balance card in sync
+    renderCurrentBalance(details.acnum);
+
     alert("Deposit successful!");
 
     // Clear inputs
-    depo.value = ""; 
-    depo_acnum.value = ""; 
+    depo.value = "";
+    depo_acnum.value = "";
     depo_password.value = "";
 
   } else {
@@ -238,11 +243,14 @@ function withdraw(){
     // Render updated transaction history
     displayHistory(uses.transactions);
 
+    // Keep the persistent balance card in sync
+    renderCurrentBalance(withdet.withact);
+
     alert("Withdrawal successful!");
 
     // Clear inputs
-    with_amt.value = ""; 
-    with_acnum.value = ""; 
+    with_amt.value = "";
+    with_acnum.value = "";
     with_pass.value = "";
 
   } else {
@@ -251,14 +259,46 @@ function withdraw(){
 }
 
 
+function renderCurrentBalance(acctnum){
+  const card = document.getElementById("currentBalance");
+  if (!card) return;
 
+  const acc = JSON.parse(localStorage.getItem(acctnum) || "null");
+  if (!acc) return;
 
-function logout() {
-  // Clear only current active session
-  localStorage.removeItem("currentUser");
-
-  alert("Logged out successfully!");
-  window.location.href = "index.html"; 
+  card.innerHTML = `
+    <h5 class="text-sm uppercase tracking-wide text-slate-400 mb-2">Current Balance</h5>
+    <p class="text-4xl font-bold text-emerald-400">₹${acc.balance}</p>
+  `;
 }
 
 
+function displayHistory(transactions){
+  const tablebody = document.getElementById("trans_history");
+  if (!tablebody) return;
+
+  if (!transactions || transactions.length === 0) {
+    tablebody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-slate-400">No transactions yet</td></tr>`;
+    return;
+  }
+
+  tablebody.innerHTML = transactions.map((t) => `
+    <tr class="border-b border-slate-700 hover:bg-slate-800">
+      <td class="p-3">${t.date}</td>
+      <td class="p-3 font-semibold ${t.type === 'Deposit' ? 'text-emerald-400' : 'text-red-400'}">${t.type}</td>
+      <td class="p-3">₹${t.amount}</td>
+      <td class="p-3">₹${t.balance}</td>
+    </tr>
+  `).join("");
+}
+
+
+
+function logout() {
+  // Clear the full session, not just one key
+  localStorage.removeItem("currentUser");
+  localStorage.removeItem("usrname");
+
+  alert("Logged out successfully!");
+  window.location.href = "index.html";
+}
